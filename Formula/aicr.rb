@@ -5,98 +5,67 @@
 class Aicr < Formula
   desc "Tooling for deploying optimized, validated, and reproducible GPU-accelerated AI runtime in Kubernetes."
   homepage "https://github.com/NVIDIA/aicr"
-  version "0.10.11"
+  version "0.10.12"
   license "Apache-2.0"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/NVIDIA/aicr/releases/download/v0.10.11/aicr_0.10.11_darwin_amd64.tar.gz"
-      sha256 "93ba996d3054e7646eb8798cc46982497b828557b4dc13e9383baa6d692041e1"
+      url "https://github.com/NVIDIA/aicr/releases/download/v0.10.12/aicr_0.10.12_darwin_amd64.tar.gz"
+      sha256 "bef808b9c3d73fdcf2d97e2dc115c745822acbbe99fb2e7dfb774d170f6351fd"
 
       define_method(:install) do
         bin.install "aicr"
-        # Install attestation bundle next to binary (aicr looks for <binary>-attestation.sigstore.json)
         bin.install "aicr-attestation.sigstore.json" if File.exist? "aicr-attestation.sigstore.json"
-        # Verify provenance attestation if cosign is available
-        if File.exist?(bin/"aicr-attestation.sigstore.json") && which("cosign")
-          system "cosign", "verify-blob-attestation",
-                 "--bundle", bin/"aicr-attestation.sigstore.json",
-                 "--type", "https://slsa.dev/provenance/v1",
-                 "--certificate-oidc-issuer", "https://token.actions.githubusercontent.com",
-                 "--certificate-identity-regexp", "https://github.com/NVIDIA/aicr/.github/workflows/on-tag\\.yaml@refs/tags/.*",
-                 bin/"aicr"
-          ohai "Provenance verified — binary built by github.com/NVIDIA/aicr CI pipeline"
-        end
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/NVIDIA/aicr/releases/download/v0.10.11/aicr_0.10.11_darwin_arm64.tar.gz"
-      sha256 "7e236ae894e309a652d59c84dfc9cf0cba57f060a343c4f60598aecbee6ec1fd"
+      url "https://github.com/NVIDIA/aicr/releases/download/v0.10.12/aicr_0.10.12_darwin_arm64.tar.gz"
+      sha256 "64663f8ce8107657a799882c005e59156ed8d196f5228c03f5cc7c5a57548128"
 
       define_method(:install) do
         bin.install "aicr"
-        # Install attestation bundle next to binary (aicr looks for <binary>-attestation.sigstore.json)
         bin.install "aicr-attestation.sigstore.json" if File.exist? "aicr-attestation.sigstore.json"
-        # Verify provenance attestation if cosign is available
-        if File.exist?(bin/"aicr-attestation.sigstore.json") && which("cosign")
-          system "cosign", "verify-blob-attestation",
-                 "--bundle", bin/"aicr-attestation.sigstore.json",
-                 "--type", "https://slsa.dev/provenance/v1",
-                 "--certificate-oidc-issuer", "https://token.actions.githubusercontent.com",
-                 "--certificate-identity-regexp", "https://github.com/NVIDIA/aicr/.github/workflows/on-tag\\.yaml@refs/tags/.*",
-                 bin/"aicr"
-          ohai "Provenance verified — binary built by github.com/NVIDIA/aicr CI pipeline"
-        end
       end
     end
   end
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/NVIDIA/aicr/releases/download/v0.10.11/aicr_0.10.11_linux_amd64.tar.gz"
-      sha256 "a842f6b88e26ce9949571d046c6e50e31a8501049632715e638aa1d3ea0fa63f"
+      url "https://github.com/NVIDIA/aicr/releases/download/v0.10.12/aicr_0.10.12_linux_amd64.tar.gz"
+      sha256 "bcb5181e137821329bdaa50780f214c7ea8da16423100f104937168bc258ddd0"
       define_method(:install) do
         bin.install "aicr"
-        # Install attestation bundle next to binary (aicr looks for <binary>-attestation.sigstore.json)
         bin.install "aicr-attestation.sigstore.json" if File.exist? "aicr-attestation.sigstore.json"
-        # Verify provenance attestation if cosign is available
-        if File.exist?(bin/"aicr-attestation.sigstore.json") && which("cosign")
-          system "cosign", "verify-blob-attestation",
-                 "--bundle", bin/"aicr-attestation.sigstore.json",
-                 "--type", "https://slsa.dev/provenance/v1",
-                 "--certificate-oidc-issuer", "https://token.actions.githubusercontent.com",
-                 "--certificate-identity-regexp", "https://github.com/NVIDIA/aicr/.github/workflows/on-tag\\.yaml@refs/tags/.*",
-                 bin/"aicr"
-          ohai "Provenance verified — binary built by github.com/NVIDIA/aicr CI pipeline"
-        end
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/NVIDIA/aicr/releases/download/v0.10.11/aicr_0.10.11_linux_arm64.tar.gz"
-      sha256 "18da91b265d159b08be5915b49ece0ac0af6a4f06287c7bbd83d3f6a8aac554b"
+      url "https://github.com/NVIDIA/aicr/releases/download/v0.10.12/aicr_0.10.12_linux_arm64.tar.gz"
+      sha256 "dd99e1e8e6f262e9d1d401769c0e667be974298cbdda8f5b44666e3941ce3e10"
       define_method(:install) do
         bin.install "aicr"
-        # Install attestation bundle next to binary (aicr looks for <binary>-attestation.sigstore.json)
         bin.install "aicr-attestation.sigstore.json" if File.exist? "aicr-attestation.sigstore.json"
-        # Verify provenance attestation if cosign is available
-        if File.exist?(bin/"aicr-attestation.sigstore.json") && which("cosign")
-          system "cosign", "verify-blob-attestation",
-                 "--bundle", bin/"aicr-attestation.sigstore.json",
-                 "--type", "https://slsa.dev/provenance/v1",
-                 "--certificate-oidc-issuer", "https://token.actions.githubusercontent.com",
-                 "--certificate-identity-regexp", "https://github.com/NVIDIA/aicr/.github/workflows/on-tag\\.yaml@refs/tags/.*",
-                 bin/"aicr"
-          ohai "Provenance verified — binary built by github.com/NVIDIA/aicr CI pipeline"
-        end
       end
     end
   end
 
   def caveats
     <<~EOS
-      To enable supply chain verification, update the bundle attestation root:
+      To verify supply-chain provenance (requires cosign):
+
+        cosign verify-blob-attestation \
+          --bundle #{opt_bin}/aicr-attestation.sigstore.json \
+          --type https://slsa.dev/provenance/v1 \
+          --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+          --certificate-identity-regexp "https://github.com/NVIDIA/aicr/.github/workflows/on-tag\\.yaml@refs/tags/.*" \
+          #{opt_bin}/aicr
+
+      To update the trust root for bundle attestation:
 
         aicr trust update
     EOS
+  end
+
+  test do
+    assert_match version.to_s, shell_output("#{bin}/aicr version")
   end
 end
