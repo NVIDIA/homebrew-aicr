@@ -5,13 +5,13 @@
 class Aicr < Formula
   desc "Tooling for deploying optimized, validated, and reproducible GPU-accelerated AI runtime in Kubernetes."
   homepage "https://github.com/NVIDIA/aicr"
-  version "0.12.1"
+  version "0.13.0"
   license "Apache-2.0"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/NVIDIA/aicr/releases/download/v0.12.1/aicr_0.12.1_darwin_amd64.tar.gz"
-      sha256 "8ee47b4a28069de6ce849135fb87493601b6e1b73eab4040dabc70d06ac13ccb"
+      url "https://github.com/NVIDIA/aicr/releases/download/v0.13.0/aicr_0.13.0_darwin_amd64.tar.gz"
+      sha256 "4606ff087b29a903103d80f8345a0341116003a8faa37b55fe179b79c50b4047"
 
       define_method(:install) do
         bin.install "aicr"
@@ -20,8 +20,8 @@ class Aicr < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/NVIDIA/aicr/releases/download/v0.12.1/aicr_0.12.1_darwin_arm64.tar.gz"
-      sha256 "5759ffb19e836891bb42d0d44d307a98004b5d929cd90d8f0809f958394b7486"
+      url "https://github.com/NVIDIA/aicr/releases/download/v0.13.0/aicr_0.13.0_darwin_arm64.tar.gz"
+      sha256 "2ddb0f325b6529e53ad4042bd593f96988c31bac4d5e90540a45d642ee022f1f"
 
       define_method(:install) do
         bin.install "aicr"
@@ -33,8 +33,8 @@ class Aicr < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/NVIDIA/aicr/releases/download/v0.12.1/aicr_0.12.1_linux_amd64.tar.gz"
-      sha256 "1c08273dd2419adf385d3b00d0f9446dfa700121b32506572f7eab48ea67e8de"
+      url "https://github.com/NVIDIA/aicr/releases/download/v0.13.0/aicr_0.13.0_linux_amd64.tar.gz"
+      sha256 "5eeb1338d8cc5d2019ebeb669a4e38553a95761db3a9055f844f935acb4ff924"
       define_method(:install) do
         bin.install "aicr"
         bin.install "aicr-attestation.sigstore.json" if File.exist? "aicr-attestation.sigstore.json"
@@ -42,8 +42,8 @@ class Aicr < Formula
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/NVIDIA/aicr/releases/download/v0.12.1/aicr_0.12.1_linux_arm64.tar.gz"
-      sha256 "09fc3b1b927e8d07101bfba374b496df91a9ae74b7cef35cb0655343846be73a"
+      url "https://github.com/NVIDIA/aicr/releases/download/v0.13.0/aicr_0.13.0_linux_arm64.tar.gz"
+      sha256 "3ffd81654f4ff69e552d09e3e90854ec2c16167e4ce8d2eb65d5754cf278e97c"
       define_method(:install) do
         bin.install "aicr"
         bin.install "aicr-attestation.sigstore.json" if File.exist? "aicr-attestation.sigstore.json"
